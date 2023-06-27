@@ -10,7 +10,7 @@ cp "$1" tmp-unprotecting/in.xlsx
 
 cd tmp-unprotecting
 7z x in.xlsx xl/worksheets
-find xl/worksheets -type f -name "*.xml" -exec sed -i 's/sheetProtection/sheepProtection/g' {} +
+find xl/worksheets -type f -name "*.xml" -exec sed -i -E 's/<sheetProtection [^>]+\/>//' {} +
 # I do this entire mkdir / cd / cp dance just because idk how to do `7z x -otmp-unprotecting xl/worksheets` and then `7z u xl/worksheets` (its in different dir)
 7z u in.xlsx xl/worksheets
 cd ..
